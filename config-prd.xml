@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configs>
+    <config name="logPath" value="/home/intern/ES_LOGIN_LOGS/logs/" />
+    <config name="lock_file" value="/home/intern/ES_LOGIN_LOGS/lock_files/process.lock" />
+    <config name="sqlPath" value="/home/intern/ES_LOGIN_LOGS/sql/" />
+
+</configs>

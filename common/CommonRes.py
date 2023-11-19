@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-res = {}
+def create_res():
+    res = {}
 
-# Default Setting
-res["code"] = "Success"
-res["result"] = None
+    # Default Setting
+    res["code"] = "Success"
+    res["result"] = None
+
+    return res

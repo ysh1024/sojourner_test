@@ -3,6 +3,4 @@
 <configs>
     <config name="label" value="local" />
 
-    <config name="index_test" value="test" />
-
 </configs>

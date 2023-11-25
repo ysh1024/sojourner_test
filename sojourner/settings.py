@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from common.config import get_config
+from sojourner.middleware import UserAgentMiddleware
 
 # Setting Variables
 CONFIGS = get_config()
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'sojourner.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'sojourner.urls'
@@ -130,6 +132,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
+from sojourner.log_settings import CustomServerFormatter
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -149,6 +156,10 @@ LOGGING = {
         },
         'standard': {
             'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
+        'verbose': {
+            '()': 'sojourner.log_settings.CustomServerFormatter',
+            'format': '[%(server_time)s] "%(request)s" %(status_code)s',
         },
     },
     'handlers': {
@@ -177,10 +188,25 @@ LOGGING = {
             'backupCount': 5,
             'formatter': 'standard',
         },
+        'access_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': BASE_DIR / 'logs/access.log',
+            'when': 'midnight',
+            'interval': 1,
+            'encoding': 'utf-8',
+            'backupCount': 365,
+            'formatter': 'verbose',
+        },
+        # 'django.request': {
+        #     'handlers': ['console'],
+        #     'level': 'DEBUG',  # change debug level as appropiate
+        #     'propagate': False,
+        # },
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'mail_admins', 'file'],
+            'handlers': ['console', 'mail_admins', 'file', 'access_file'],
             'level': 'INFO',
         },
         'django.server': {

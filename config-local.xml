@@ -5,6 +5,4 @@
     <config name="lock_file" value="./lock_files/process.lock" />
     <config name="sqlPath" value="./sql/" />
 
-    <config name="slack_assign_user" value="dale_yeo" />
-    <config name="slack_channel" value="devsec-test" />
 </configs>

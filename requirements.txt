@@ -1,4 +1,4 @@
-Django
-djangorestframework
-django-filter
-django-request-logging
+Django==4.2.7
+djangorestframework==3.14.0
+django-filter==23.3
+django-request-logging==0.7.5

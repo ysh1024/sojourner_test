@@ -188,16 +188,16 @@ LOGGING = {
             'backupCount': 5,
             'formatter': 'standard',
         },
-        'access_file': {
-            'level': 'INFO',
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': BASE_DIR / 'logs/access.log',
-            'when': 'midnight',
-            'interval': 1,
-            'encoding': 'utf-8',
-            'backupCount': 365,
-            'formatter': 'verbose',
-        },
+        # 'access_file': {
+        #     'level': 'INFO',
+        #     'class': 'logging.handlers.TimedRotatingFileHandler',
+        #     'filename': BASE_DIR / 'logs/access.log',
+        #     'when': 'midnight',
+        #     'interval': 1,
+        #     'encoding': 'utf-8',
+        #     'backupCount': 365,
+        #     'formatter': 'verbose',
+        # },
         # 'django.request': {
         #     'handlers': ['console'],
         #     'level': 'DEBUG',  # change debug level as appropiate
@@ -206,7 +206,7 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'mail_admins', 'file', 'access_file'],
+            'handlers': ['console', 'mail_admins', 'file'],
             'level': 'INFO',
         },
         'django.server': {

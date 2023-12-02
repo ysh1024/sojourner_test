@@ -6,6 +6,9 @@ COPY . /app
 # 작업 위치가 /app이라는 뜻
 WORKDIR /app
 
+RUN apk update \
+&& apk add --virtual build-deps gcc python3-dev musl-dev \
+&& apk add --no-cache jpeg-dev zlib-dev mariadb-dev
 RUN pip install -r requirements.txt
 EXPOSE 8000
 

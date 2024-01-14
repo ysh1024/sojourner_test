@@ -5,9 +5,9 @@ from .serializers import PostArgsSerializer
 from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from common.CommonRes import create_res
+from django.conf import settings
 
 from .service import methodTestService
-from .serviceImpl.methodTestServiceImpl import *
 
 # Create your views here.
 @swagger_auto_schema(
@@ -26,7 +26,10 @@ from .serviceImpl.methodTestServiceImpl import *
 @permission_classes([AllowAny])
 def post_test(request):
     if request.method == 'GET':
+        # Get 메소드 파라미터를 serializer로 변환
         serializer = PostArgsSerializer(data=request.query_params)
+        
+        # 공통 response 객체 생성
         res = create_res()
 
         if serializer.is_valid():
@@ -37,6 +40,9 @@ def post_test(request):
             res["code"] = "Error"
             res["result"] = "포맷이 적절하지 않습니다"
 
+        # configs 객체 로드
+        configs = getattr(settings, 'CONFIGS', None)
+        print(configs)
 
         '''
           ####  Service 로직 ####
@@ -52,7 +58,9 @@ def post_test(request):
 
         return Response(res, status=status.HTTP_200_OK)
 
-    if request.method == 'POST':
+
+
+    elif request.method == 'POST':
         serializer = PostArgsSerializer(data=request.data)
         # print(serializer.initial_data)
         res = create_res()
